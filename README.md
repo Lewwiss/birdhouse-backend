@@ -18,6 +18,7 @@ Within **house.service.ts** I created a few different functions:
  - updateResidencyById()
  - deleteHouseById()
  - authenticateUbidFromId()
+ - pruneHouses()
 
 Each of these functions are accessible to the **house.controller.ts** and helped clean up the controller to see which parameters were taken into each of the routes.
 
