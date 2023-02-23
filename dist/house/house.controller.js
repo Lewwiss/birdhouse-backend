@@ -41,6 +41,10 @@ let HouseController = class HouseController {
         return this.houseService.createHouse(ubid, name, longitude, latitude);
     }
     ;
+    pruneHouses(ubid) {
+        return this.houseService.pruneHouses(ubid);
+    }
+    ;
     updateResidencyById(ubid, id, birds, eggs) {
         return this.houseService.updateResidencyById(ubid, id, birds, eggs);
     }
@@ -90,6 +94,13 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object, Object, Object]),
     __metadata("design:returntype", house_model_1.House)
 ], HouseController.prototype, "createHouse", null);
+__decorate([
+    (0, common_1.Post)("prune"),
+    __param(0, (0, common_1.Headers)("X-UBID")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Object)
+], HouseController.prototype, "pruneHouses", null);
 __decorate([
     (0, common_1.Post)(":id/residency"),
     __param(0, (0, common_1.Headers)("X-UBID")),

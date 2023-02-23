@@ -5,7 +5,9 @@ export class House {
         public longitude: Number,
         public latitude: Number,
         public birds: Birds[] = [],
-        public eggs: Eggs[] = []
+        public eggs: Eggs[] = [],
+        public created: Number,
+        public updated: Number
     ) {}
 };
 

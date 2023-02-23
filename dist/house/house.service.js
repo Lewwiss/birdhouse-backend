@@ -29,15 +29,21 @@ let HouseService = class HouseService {
         const houseIndex = this.houses.findIndex(item => item.id === id);
         const currentHouse = this.houses[houseIndex];
         const updatedHouse = Object.assign({}, currentHouse);
-        updatedHouse.name = name;
+        if (name.length < 4 || name.length > 16) {
+            updatedHouse.name = name;
+        }
+        ;
         updatedHouse.longitude = longitude;
         updatedHouse.latitude = latitude;
+        updatedHouse.updated = Date.now();
         this.houses[houseIndex] = updatedHouse;
         console.log(`${ubid} updated ${id}`);
         return this.houses[houseIndex];
     }
     ;
     createHouse(ubid, name, longitude, latitude) {
+        if (name.length < 4 || name.length > 16)
+            return "Name cannot be shorter than 4 or longer than 16 characters";
         const id = Math.random().toString(16).slice(2);
         if (ubid && registration_1.registrations.find(item => item.ubid === ubid)) {
             const registrationIndex = registration_1.registrations.findIndex(item => item.ubid === ubid);
@@ -48,7 +54,9 @@ let HouseService = class HouseService {
             registration_1.registrations.push(new registration_model_1.Registration(ubid, [id]));
         }
         ;
-        const houseObj = new house_model_1.House(id, name, longitude, latitude);
+        const created = Date.now();
+        const updated = created;
+        const houseObj = new house_model_1.House(id, name, longitude, latitude, [], [], created, updated);
         this.houses.push(houseObj);
         console.log(`${ubid} created ${id}`);
         return Object.assign(Object.assign({}, houseObj), { ubid });
@@ -62,6 +70,7 @@ let HouseService = class HouseService {
         const updatedResidency = Object.assign({}, currentHouse);
         updatedResidency.birds.push(birds);
         updatedResidency.eggs.push(eggs);
+        updatedResidency.updated = Date.now();
         this.houses[houseIndex] = updatedResidency;
         console.log(`${ubid} updated ${id}`);
         return this.houses[houseIndex];
@@ -87,6 +96,27 @@ let HouseService = class HouseService {
             return true;
         else
             return false;
+    }
+    ;
+    pruneHouses(ubid) {
+        if (this.houses.length <= 0)
+            return;
+        console.log(`${ubid} pruned`);
+        this.houses.forEach((house) => {
+            const createdDate = new Date(house.created.valueOf());
+            const updatedDate = new Date(house.updated.valueOf());
+            const differenceTime = Math.abs(createdDate.valueOf() - updatedDate.valueOf());
+            const differenceDays = Math.ceil(differenceTime.valueOf() / (1000 * 60 * 60 * 24));
+            if (differenceDays.valueOf() >= 365) {
+                const houseIndex = this.houses.findIndex(item => item.id === house.id);
+                this.houses.splice(houseIndex, 1);
+                const registrationIndex = registration_1.registrations.findIndex(item => item.ids.includes(house.id));
+                const idIndex = registration_1.registrations[registrationIndex].ids.findIndex(item => item === house.id);
+                registration_1.registrations[registrationIndex].ids.splice(idIndex, 1);
+            }
+            ;
+        });
+        return;
     }
     ;
 };

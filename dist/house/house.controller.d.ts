@@ -9,6 +9,7 @@ export declare class HouseController {
     getHouseById(id: any): House;
     updateHouseById(ubid: any, id: any, name: any, longitude: any, latitude: any): House;
     createHouse(ubid: any, name: any, longitude: any, latitude: any): House;
+    pruneHouses(ubid: any): any;
     updateResidencyById(ubid: any, id: any, birds: Birds, eggs: Eggs): House;
     deleteHouseById(ubid: any, id: any): any;
 }

@@ -8,4 +8,5 @@ export declare class HouseService {
     updateResidencyById(ubid: any, id: any, birds: any, eggs: any): any;
     deleteHouseById(ubid: any, id: any): void;
     authenticateUbidFromId(ubid: any, id: any): Boolean;
+    pruneHouses(ubid: any): any;
 }

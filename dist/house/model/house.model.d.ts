@@ -5,7 +5,9 @@ export declare class House {
     latitude: Number;
     birds: Birds[];
     eggs: Eggs[];
-    constructor(id: String, name: String, longitude: Number, latitude: Number, birds?: Birds[], eggs?: Eggs[]);
+    created: Number;
+    updated: Number;
+    constructor(id: String, name: String, longitude: Number, latitude: Number, birds: Birds[], eggs: Eggs[], created: Number, updated: Number);
 }
 export declare class Birds {
     date: String;

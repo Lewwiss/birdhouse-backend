@@ -33,6 +33,11 @@ export class HouseController {
         return this.houseService.createHouse(ubid, name, longitude, latitude);
     };
 
+    @Post("prune")
+    pruneHouses(@Headers("X-UBID") ubid): any {
+        return this.houseService.pruneHouses(ubid);
+    };
+
     @Post(":id/residency")
     updateResidencyById(@Headers("X-UBID") ubid, @Param("id") id, @Body("birds") birds: Birds , @Body("eggs") eggs: Eggs): House {
         return this.houseService.updateResidencyById(ubid, id, birds, eggs);
