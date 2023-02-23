@@ -32,33 +32,37 @@ export class HouseService {
         updatedHouse.latitude = latitude;
         // Replaces and returns new house object
         this.houses[houseIndex] = updatedHouse;
+        // Logging
+        console.log(`${ubid} updated ${id}`);
         return this.houses[houseIndex];
     };
 
     createHouse(ubid, name, longitude, latitude): any {
         // Creates us a random id
-        const houseId = Math.random().toString(16).slice(2);
+        const id = Math.random().toString(16).slice(2);
         // Check if ubid is present in request and exists
         if (ubid && registrations.find(item => item.ubid === ubid)) {
             // Finds the index of ubid
             const registrationIndex = registrations.findIndex(item => item.ubid === ubid)
-            // Add new houseId to existing ubid
-            registrations[registrationIndex].ids.push(houseId);
+            // Add new id to existing ubid
+            registrations[registrationIndex].ids.push(id);
         } else {
             // If ubid doesn't exist in request
             ubid = Math.random().toString(16).slice(2);
             // Add ubid value to registrations
-            registrations.push(new Registration(ubid, [houseId]));
+            registrations.push(new Registration(ubid, [id]));
         };
         // Creates a new House object with given values
         const houseObj = new House (
-            houseId,
+            id,
             name,
             longitude,
             latitude,
         );
         // Pushes new house to the houses array
         this.houses.push(houseObj);
+        // Logging
+        console.log(`${ubid} created ${id}`);
         return {...houseObj, ubid};
     };
 
@@ -76,6 +80,8 @@ export class HouseService {
         updatedResidency.eggs.push(eggs);
         // Replaces and returns new house object
         this.houses[houseIndex] = updatedResidency;
+        // Logging
+        console.log(`${ubid} updated ${id}`);
         return this.houses[houseIndex];
     };
 
@@ -92,6 +98,8 @@ export class HouseService {
         const idIndex = registrations[registrationIndex].ids.findIndex(item => item === id);
         // Splices this id out of ids array
         registrations[registrationIndex].ids.splice(idIndex, 1);
+        // Logging
+        console.log(`${ubid} deleted ${id}`);
         return;
     };
 
