@@ -1,73 +1,80 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+<img width="120px" src="https://camo.githubusercontent.com/5f54c0817521724a2deae8dedf0c280a589fd0aa9bffd7f19fa6254bb52e996a/68747470733a2f2f6e6573746a732e636f6d2f696d672f6c6f676f2d736d616c6c2e737667" align="right" />
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# Birdhouse Backend
+> Built using [NestJS](https://nestjs.com/) and [Typescript](https://www.typescriptlang.org/)
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+### Overview
 
-## Description
+I first tried to outline my main routes and create a simple layout of how my routes would function. I also decided to create a houses array to interact with, that would act as my database.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+#### Setup & Functions
 
-## Installation
+Within **house.service.ts** I created a few different functions:
 
-```bash
-$ npm install
+ - getAllHouses()
+ - getHouseById()
+ - updateHouseById()
+ - createHouse()
+ - updateResidencyById()
+ - deleteHouseById()
+ - authenticateUbidFromId()
+
+Each of these functions are accessible to the **house.controller.ts** and helped clean up the controller to see which parameters were taken into each of the routes.
+
+#### Authenication
+After setting up these routes I tried to think of the best way to authenticate using the UBID, so I decided to create a registration array and store each UBID along with their birdhouse ID's.
+
+I could use this registration array in the **house.middleware.ts** on all protected routes. In the middleware function it would check to see if that UBID exists.
+
+The registration array is also used in the **house.service.ts** to check that the specific ID being updated or deleted belongs to that specific UBID. I also added a check within the createHouse() method, that will append the newly created ID to an existing UBID if it is present in the request header and still exists in the registration array.
+
+#### Generating IDs and UBIDs
+To keep my API as simple as possible, I used this function to generate a random string to use for both my ID and UBIDs.
+```typescript
+const id = Math.random().toString(16).slice(2);
+const ubid = Math.random().toString(16).slice(2);
 ```
 
-## Running the app
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+#### House, Bird and Eggs Models
+```typescript
+export class House {
+	constructor(
+		public id: String,
+		public name: String,
+		public longitude: Number,
+		public latitude: Number,
+		public birds: Birds[] = [],
+		public eggs: Eggs[] = []
+	)  {}
+};
 ```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```typescript
+export class Birds  {
+	constructor(
+		public date: String,
+		public amount: Number
+	)  {}
+};
 ```
+```typescript
+export class Eggs  {
+	constructor(
+		public date: String,
+		public amount: Number
+	)  {}
+};
+```
+#### Registration Model
+```typescript
+export class Registration  {
+	constructor(
+		public ubid: String,
+		public ids: String[]
+	)  {}
+};
+```
+```typescript
+import  {  Registration  }  from  "./registration.model";
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+export  const  registrations: Registration[] = [];
+```
