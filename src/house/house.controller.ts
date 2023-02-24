@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Patch, Delete, Body, Param, Headers } from '@nestjs/common';
 import { HouseService } from './house.service';
-import { House, Birds, Eggs } from './model/house.model';
+import { House } from './model/house.model';
 import { registrations } from './registration/registration';
 import { Registration } from './registration/registration.model';
 
@@ -9,7 +9,7 @@ export class HouseController {
     constructor(private readonly houseService: HouseService) {}
 
     @Get()
-    getAllHouses() {
+    getAllHouses(): any{
         return this.houseService.getAllHouses();
     };
 
@@ -39,7 +39,7 @@ export class HouseController {
     };
 
     @Post(":id/residency")
-    updateResidencyById(@Headers("X-UBID") ubid, @Param("id") id, @Body("birds") birds: Birds , @Body("eggs") eggs: Eggs): House {
+    updateResidencyById(@Headers("X-UBID") ubid, @Param("id") id, @Body("birds") birds: Number , @Body("eggs") eggs: Number): House {
         return this.houseService.updateResidencyById(ubid, id, birds, eggs);
     };
 

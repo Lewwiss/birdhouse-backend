@@ -56,7 +56,7 @@ let HouseService = class HouseService {
         ;
         const created = Date.now();
         const updated = created;
-        const houseObj = new house_model_1.House(id, name, longitude, latitude, [], [], created, updated);
+        const houseObj = new house_model_1.House(id, name, longitude, latitude, [], created, updated);
         this.houses.push(houseObj);
         console.log(`${ubid} created ${id}`);
         return Object.assign(Object.assign({}, houseObj), { ubid });
@@ -68,8 +68,8 @@ let HouseService = class HouseService {
         const houseIndex = this.houses.findIndex(item => item.id === id);
         const currentHouse = this.houses[houseIndex];
         const updatedResidency = Object.assign({}, currentHouse);
-        updatedResidency.birds.push(birds);
-        updatedResidency.eggs.push(eggs);
+        const newResidency = new house_model_1.Residency(Date.now(), birds, eggs);
+        updatedResidency.residency.push(newResidency);
         updatedResidency.updated = Date.now();
         this.houses[houseIndex] = updatedResidency;
         console.log(`${ubid} updated ${id}`);

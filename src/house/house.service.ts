@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { House } from './model/house.model';
+import { House, Residency } from './model/house.model';
 import { Registration } from './registration/registration.model';
 import { registrations } from './registration/registration';
 
@@ -7,7 +7,7 @@ import { registrations } from './registration/registration';
 export class HouseService {
     private readonly houses: House[] = [];
 
-    getAllHouses() {
+    getAllHouses(): any {
         // Returns house array
         return this.houses;
     };
@@ -69,7 +69,6 @@ export class HouseService {
             longitude,
             latitude,
             [],
-            [],
             created,
             updated
         );
@@ -89,9 +88,10 @@ export class HouseService {
         const currentHouse = this.houses[houseIndex];
         // Creates a new house with old values
         const updatedResidency = {...currentHouse};
+        // Creates a new residency
+        const newResidency = new Residency(Date.now(), birds, eggs);
         // Pushes new residency records to house object
-        updatedResidency.birds.push(birds);
-        updatedResidency.eggs.push(eggs);
+        updatedResidency.residency.push(newResidency);
         updatedResidency.updated = Date.now();
         // Replaces and returns new house object
         this.houses[houseIndex] = updatedResidency;

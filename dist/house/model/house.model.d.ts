@@ -3,19 +3,14 @@ export declare class House {
     name: String;
     longitude: Number;
     latitude: Number;
-    birds: Birds[];
-    eggs: Eggs[];
+    residency: Residency[];
     created: Number;
     updated: Number;
-    constructor(id: String, name: String, longitude: Number, latitude: Number, birds: Birds[], eggs: Eggs[], created: Number, updated: Number);
+    constructor(id: String, name: String, longitude: Number, latitude: Number, residency: Residency[], created: Number, updated: Number);
 }
-export declare class Birds {
-    date: String;
-    amount: Number;
-    constructor(date: String, amount: Number);
-}
-export declare class Eggs {
-    date: String;
-    amount: Number;
-    constructor(date: String, amount: Number);
+export declare class Residency {
+    date: Number;
+    birds: Number;
+    eggs: Number;
+    constructor(date: Number, birds: Number, eggs: Number);
 }

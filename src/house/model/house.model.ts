@@ -4,23 +4,16 @@ export class House {
         public name: String,
         public longitude: Number,
         public latitude: Number,
-        public birds: Birds[] = [],
-        public eggs: Eggs[] = [],
+        public residency: Residency[] = [],
         public created: Number,
         public updated: Number
     ) {}
 };
 
-export class Birds {
+export class Residency {
     constructor(
-        public date: String,
-        public amount: Number
-    ) {}
-};
-
-export class Eggs {
-    constructor(
-        public date: String,
-        public amount: Number
+        public date: Number,
+        public birds: Number,
+        public eggs: Number
     ) {}
 };

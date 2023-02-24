@@ -58,7 +58,7 @@ __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Object)
 ], HouseController.prototype, "getAllHouses", null);
 __decorate([
     (0, common_1.Get)("registrations"),
@@ -108,7 +108,7 @@ __decorate([
     __param(2, (0, common_1.Body)("birds")),
     __param(3, (0, common_1.Body)("eggs")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object, house_model_1.Birds, house_model_1.Eggs]),
+    __metadata("design:paramtypes", [Object, Object, Number, Number]),
     __metadata("design:returntype", house_model_1.House)
 ], HouseController.prototype, "updateResidencyById", null);
 __decorate([
