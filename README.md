@@ -5,7 +5,7 @@
 
 ### Overview
 
-I first tried to outline my main routes and create a simple layout of how my routes would function. I also decided to create a houses array to interact with, that would act as my database.
+I first tried to outline my main routes and create a simple layout of how my routes would function. I also decided to hardcode a "houses" array within **house.service.ts** to interact with (this would act as my database).
 
 ### Setup & Functions
 
@@ -18,6 +18,7 @@ Within **house.service.ts** I created a few different functions:
  - updateResidencyById()
  - deleteHouseById()
  - authenticateUbidFromId()
+ - pruneHouses()
 
 Each of these functions are accessible to the **house.controller.ts** and helped clean up the controller to see which parameters were taken into each of the routes.
 
@@ -44,7 +45,9 @@ export class House {
 		public longitude: Number,
 		public latitude: Number,
 		public birds: Birds[] = [],
-		public eggs: Eggs[] = []
+		public eggs: Eggs[] = [],
+		public created: Number,
+		public updated: Number
 	)  {}
 };
 ```
