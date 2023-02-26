@@ -13,7 +13,53 @@ const registration_model_1 = require("./registration/registration.model");
 const registration_1 = require("./registration/registration");
 let HouseService = class HouseService {
     constructor() {
-        this.houses = [];
+        this.houses = [
+            {
+                "id": "39c5235feaeb4",
+                "name": "Cool birdhouse",
+                "longitude": 7.16085,
+                "latitude": 16.072736,
+                "residency": [
+                    {
+                        "date": 1676851200000,
+                        "birds": 4,
+                        "eggs": 1
+                    },
+                    {
+                        "date": 1676937600000,
+                        "birds": 5,
+                        "eggs": 2
+                    },
+                    {
+                        "date": 1677024000000,
+                        "birds": 5,
+                        "eggs": 4
+                    },
+                    {
+                        "date": 1677110400000,
+                        "birds": 4,
+                        "eggs": 10
+                    },
+                    {
+                        "date": 1677196800000,
+                        "birds": 2,
+                        "eggs": 5
+                    },
+                    {
+                        "date": 1677283200000,
+                        "birds": 2,
+                        "eggs": 10
+                    },
+                    {
+                        "date": 1677369600000,
+                        "birds": 3,
+                        "eggs": 0
+                    }
+                ],
+                "created": 1677387408589,
+                "updated": 1677387492294
+            }
+        ];
     }
     getAllHouses() {
         return this.houses;

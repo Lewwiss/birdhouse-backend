@@ -1,1 +1,1 @@
-{"version":3,"file":"registration.js","sourceRoot":"","sources":["../../../src/house/registration/registration.ts"],"names":[],"mappings":";;;AAEa,QAAA,aAAa,GAAmB,EAAE,CAAC"}
+{"version":3,"file":"registration.js","sourceRoot":"","sources":["../../../src/house/registration/registration.ts"],"names":[],"mappings":";;;AAEa,QAAA,aAAa,GAAmB;IACzC;QACI,MAAM,EAAE,eAAe;QACvB,KAAK,EAAE;YACH,eAAe;SAClB;KACJ;CACJ,CAAC"}
