@@ -39,34 +39,27 @@ const ubid = Math.random().toString(16).slice(2);
 ### House, Bird and Eggs Models
 ```typescript
 export class House {
-	constructor(
-		public id: String,
-		public name: String,
-		public longitude: Number,
-		public latitude: Number,
-		public birds: Birds[] = [],
-		public eggs: Eggs[] = [],
-		public created: Number,
-		public updated: Number
-	)  {}
+    constructor(
+        public id: String,
+        public name: String,
+        public longitude: Number,
+        public latitude: Number,
+        public residency: Residency[] = [],
+        public created: Number,
+        public updated: Number
+    ) {}
 };
 ```
 ```typescript
-export class Birds  {
-	constructor(
-		public date: String,
-		public amount: Number
-	)  {}
+export class Residency {
+    constructor(
+        public date: Number,
+        public birds: Number,
+        public eggs: Number
+    ) {}
 };
 ```
-```typescript
-export class Eggs  {
-	constructor(
-		public date: String,
-		public amount: Number
-	)  {}
-};
-```
+
 ### Registration Model
 ```typescript
 export class Registration  {
