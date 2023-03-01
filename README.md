@@ -59,11 +59,11 @@ export class Residency {
 
 ## Registration Model
 ```typescript
-export class Registration  {
-	constructor(
-		public ubid: String,
-		public ids: String[]
-	) {}
+export class Registration {
+    constructor(
+	public ubid: String,
+	public ids: String[]
+    ) {}
 };
 ```
 ```typescript
