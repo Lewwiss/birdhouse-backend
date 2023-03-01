@@ -3,6 +3,8 @@
 # Birdhouse Backend (Shockbyte)
 > Built using [NestJS](https://nestjs.com/) and [Typescript](https://www.typescriptlang.org/)
 
+Hosted version here [birdhouse-backend.vercel.app](https://birdhouse-backend.vercel.app/)
+
 ## Setup & Functions
 
 All functions below interact with the "houses" array from **house.service.ts** this is used to simulate interacting with a database (such as SQL).
